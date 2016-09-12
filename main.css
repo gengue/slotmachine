@@ -1,0 +1,502 @@
+
+[v-cloak] { display:none; }
+
+@font-face{
+    font-family: 'digital-clock-font';
+    src: url('./fonts/digital-7/digital-7.ttf');
+}
+
+body {
+    background: #1fc7ff;
+    border: dotted 6px #ffff40;
+    height: 100%;
+    padding-bottom: 139px;
+    padding-top: 18px;
+}
+
+/* ======================================================================== */
+/* BODY - MAIN */
+ 
+.slotmachine-container {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.slotmachine-scoretable {
+    width: 180px;
+    height: 300px;
+    background: yellow;
+    margin-right: 20px;
+    border-radius: 10px;
+}
+
+.slotmachine-body {
+    width: 400px;
+    background: transparent;
+    position: relative;
+}
+
+.slotmachine-result {
+    background: black;
+    height: 100px;
+    border-radius: 30px 30px 0 0;
+    text-align: center;
+    font-size: 4em;
+    border-bottom: 4px solid gray;
+}
+
+.slotmachine-display {
+    background: black;
+    width: 100%;
+    height: 140px;
+    position: relative;
+}
+
+.slotmachine-display-slot {
+    height: 100%;
+    width: 27.6%;
+    background: white;
+    display: inline-block;
+    margin: 0 10px;
+    border-radius: 5px;
+}
+
+.slotmachine-display-roll {
+    display: flex;
+    position: absolute;
+    top: 30px;
+    transition: all 300s ease-out;
+}
+
+#slot1 > .slotmachine-display-roll {
+    left: 30px;
+}
+#slot2 > .slotmachine-display-roll {
+    left: 163px;
+}
+#slot3 > .slotmachine-display-roll {
+    left: 295px;
+}
+
+.slotmachine-display-roll img:nth-of-type(1) { 
+    -webkit-transform: rotateX(0deg) translateZ(86px); 
+}
+.slotmachine-display-roll img:nth-of-type(2) {
+    -webkit-transform: rotateX(60deg) translateZ(86px); 
+}
+.slotmachine-display-roll img:nth-of-type(3) {
+    -webkit-transform: rotateX(120deg) translateZ(86px); 
+}
+.slotmachine-display-roll img:nth-of-type(4) {
+    -webkit-transform: rotateX(180deg) translateZ(86px); 
+}
+.slotmachine-display-roll img:nth-of-type(5) {
+    -webkit-transform: rotateX(240deg) translateZ(86px); 
+}
+.slotmachine-display-roll img:nth-of-type(6) {
+    -webkit-transform: rotateX(300deg) translateZ(86px); 
+}
+.slotmachine-display-roll[data-state="1"] img:nth-of-type(1),
+.slotmachine-display-roll[data-state="2"] img:nth-of-type(2),
+.slotmachine-display-roll[data-state="3"] img:nth-of-type(3),
+.slotmachine-display-roll[data-state="4"] img:nth-of-type(4),
+.slotmachine-display-roll[data-state="5"] img:nth-of-type(5),
+.slotmachine-display-roll[data-state="6"] img:nth-of-type(6) { opacity: 1; }
+
+.disabled {
+    opacity: .4;
+    pointer-events: none;
+}
+
+.slotmachine-stats {
+    background: black;
+    height: 120px;
+    border-radius: 0 0 0 40px;
+    border-top: 4px solid gray;
+    text-align: center;
+}
+
+.slotmachine-stats-slot {
+    height: 60px;
+    width: auto;
+    display: inline-block;
+    margin-left: 25px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.slotmachine-stats-slot h3 { 
+    color: white;
+    margin: 0;
+    font-family: 'Arial';
+    text-transform: uppercase;
+    font-size: 12px;
+    text-shadow: 1px 1px gray;
+
+}
+
+.slotmachine-stats-slot p { 
+    color: #ff2300;
+    border-radius: 6px;
+    border: 1px solid gray;
+    margin: 6px 0;
+    padding: 5px;
+    font-family: 'digital-clock-font';
+    font-size: 30px;
+}
+
+.slotmachine-stats-button {
+    color: black;
+    background: #ffff1f;
+    width: 50px;
+    height: 27px;
+    display: inline-block;
+    margin-left: 30px;
+    margin-top: 1px;
+    text-align: center;
+    font-size: 36px;
+    font-family: 'digital-clock-font';
+    border-bottom: 6px solid #ea9800;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.slotmachine-stats-button:active {
+    position: relative;
+    top: 6px;
+    border: none;
+}
+
+.slotmachine-handle {
+    position: absolute;
+    right: -150px;
+    bottom: -76px;
+}
+
+.shadow-top {
+    background: transparent;
+    position: absolute;
+    height: 10px;
+    width: 115px;
+    margin: 0 10px;
+    box-shadow: 0px 8px 14px 4px rgba(0,0,0,0.58);
+    top: -14px;
+    z-index: 1000000;
+}
+
+.shadow-bottom {
+    background: transparent;
+    position: absolute;
+    height: 10px;
+    width: 115px;
+    margin: 0 10px;
+    box-shadow: 0px -4px 20px 7px rgba(0,0,0,0.58);
+    bottom: -14px;
+    z-index: 1000000;
+}
+
+/* Neon effect */
+
+.slotmachine-result-text {
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.slotmachine-result .slotmachine-result-text {
+  color: #fff;
+  font-family: Monoton;
+  -webkit-animation: neon 1.5s ease-in-out infinite alternate;
+  -moz-animation: neon 1.5s ease-in-out infinite alternate;
+  animation: neon 1.5s ease-in-out infinite alternate;
+}
+
+.slotmachine-result .slotmachine-result-text.lose {
+  /*color: #FF1177;*/
+  /*-webkit-animation: none;*/
+  /*-moz-animation: none;*/
+  /*animation: none;*/
+  opacity: .4;
+}
+
+@-webkit-keyframes neon {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
+  }
+}
+
+.no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
+}
+
+/* ======================================================================== */
+/* SLOTS */
+
+.jSlots-wrapper {  
+    overflow: hidden; /* to hide the magic */  
+    height: 138px; /* whatever the height of your list items are */  
+    display: inline-block; /* to size width correctly, can use float too, or width*/  
+    width: 100%;
+}  
+
+.jSlots-wrapper ul{
+    position: initial;
+    list-style: none;
+    padding: 15px;
+}
+
+/* ======================================================================== */
+/* HANDLE */
+
+/* Mixins */
+@-moz-keyframes spin /* Firefox */ {
+  from {
+    background-position: 0, 0 0;
+  }
+  to {
+    background-position: 0, 0 -1580px;
+  }
+}
+@-webkit-keyframes spin /* Safari and Chrome */ {
+  from {
+    background-position: 0, 0 0;
+  }
+  to {
+    background-position: 0, 0 -1580px;
+  }
+}
+@-ms-keyframes spin /* IE */ {
+  from {
+    background-position: 0, 0 0;
+  }
+  to {
+    background-position: 0, 0 -1580px;
+  }
+}
+@-o-keyframes spin /* Opera */ {
+  from {
+    background-position: 0, 0 0;
+  }
+  to {
+    background-position: 0, 0 -1580px;
+  }
+}
+@keyframes spin {
+  from {
+    background-position: 0, 0 0;
+  }
+  to {
+    background-position: 0, 0 -1580px;
+  }
+}
+#equation {
+  position: absolute;
+  left: 50%;
+  margin-left: -50px;
+  top: 50%;
+  margin-top: -80px;
+}
+#equation span {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 12px;
+}
+#equation .spinner {
+  height: 140px;
+  margin: 10px;
+  margin-right: 12px;
+  background-color: #FFF;
+  background-position: 0;
+  border-radius: 5px;
+  box-shadow: inset 0 0 5px #000;
+  position: relative;
+  -webkit-animation: spin 3s linear 0s infinite;
+  -moz-animation: spin 3s linear 0s infinite;
+  -o-animation: spin 3s linear 0s infinite;
+  -ms-animation: spin 3s linear 0s infinite;
+  animation: spin 3s linear 0s infinite;
+}
+#equation .spinner:before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: -10px;
+  left: -10px;
+  width: 120px;
+  height: 160px;
+  border-radius: 10px;
+  background-color: #333;
+  background-image: -webkit-linear-gradient(#666 0%, #333 60%, #666 100%);
+  background-image: -moz-linear-gradient(#666 0%, #333 60%, #666 100%);
+  background-image: -ms-linear-gradient(#666 0%, #333 60%, #666 100%);
+  background-image: -o-linear-gradient(#666 0%, #333 60%, #666 100%);
+  box-shadow: inset 2px 2px 2px rgba(255, 255, 255, 0.2);
+}
+#equation .drink {
+  background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.6) 0%, transparent 15%, transparent 85%, rgba(0, 0, 0, 0.6) 100%), url("http://media.balsamiq.com/img/hashtaghot/drinks.jpg");
+  background-image: -moz-linear-gradient(rgba(0, 0, 0, 0.6) 0%, transparent 15%, transparent 85%, rgba(0, 0, 0, 0.6) 100%), url("http://media.balsamiq.com/img/hashtaghot/drinks.jpg");
+  background-image: -ms-linear-gradient(rgba(0, 0, 0, 0.6) 0%, transparent 15%, transparent 85%, rgba(0, 0, 0, 0.6) 100%), url("http://media.balsamiq.com/img/hashtaghot/drinks.jpg");
+  background-image: -o-linear-gradient(rgba(0, 0, 0, 0.6) 0%, transparent 15%, transparent 85%, rgba(0, 0, 0, 0.6) 100%), url("http://media.balsamiq.com/img/hashtaghot/drinks.jpg");
+  width: 80px;
+  background-size: 80px auto;
+  background-position: 0, 0 20px;
+}
+#equation .drink:before {
+  width: 100px;
+}
+#equation.zero .drink {
+  background-position: 0, 0 -1580px;
+}
+#equation.one .drink {
+  background-position: 0, 0 -1680px;
+}
+#equation.two .drink {
+  background-position: 0, 0 -1780px;
+}
+#equation.three .drink {
+  background-position: 0, 0 -1880px;
+}
+#equation.four .drink {
+  background-position: 0, 0 -1980px;
+}
+#equation.five .drink {
+  background-position: 0, 0 -2080px;
+}
+#equation.six .drink {
+  background-position: 0, 0 -2180px;
+}
+#equation.seven .drink {
+  background-position: 0, 0 -2280px;
+}
+#equation.done .spinner {
+  -webkit-animation: none;
+  -moz-animation: none;
+  -o-animation: none;
+  -ms-animation: none;
+  animation: none;
+  -webkit-transition: background-position 2s ease-out 0s;
+  -moz-transition: background-position 2s ease-out 0s;
+  -o-transition: background-position 2s ease-out 0s;
+  -ms-transition: background-position 2s ease-out 0s;
+  transition: background-position 2s ease-out 0s;
+}
+
+#shoulder {
+  position: absolute;
+  top: 30px;
+  left: -100px;
+  /*width: 80px;*/
+  width: 65px;
+  height: 100px;
+  border-radius: 0px 10px 10px 0px;
+  background-color: #333;
+  background-image: -webkit-linear-gradient(#666 0%, #333 60%, #666 100%);
+  background-image: -moz-linear-gradient(#666 0%, #333 60%, #666 100%);
+  background-image: -ms-linear-gradient(#666 0%, #333 60%, #666 100%);
+  background-image: -o-linear-gradient(#666 0%, #333 60%, #666 100%);
+  box-shadow: inset 2px 2px 2px rgba(255, 255, 255, 0.2);
+}
+
+#arm {
+  position: relative;
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+  width: 45px;
+  height: 80px;
+  border-radius: 10% / 50%;
+  background-color: #666;
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.3) 0%, transparent 15%, rgba(255, 255, 255, 0) 50%, transparent 85%, rgba(0, 0, 0, 0.3)), -webkit-linear-gradient(top, #333 0%, #666 10%, #999 30%, rgba(255, 255, 255, 0.8) 60%, #999 70%, #666 90%, #333 100%);
+  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0.3) 0%, transparent 15%, rgba(255, 255, 255, 0) 50%, transparent 85%, rgba(0, 0, 0, 0.3)), -moz-linear-gradient(top, #333 0%, #666 10%, #999 30%, rgba(255, 255, 255, 0.8) 60%, #999 70%, #666 90%, #333 100%);
+  background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0.3) 0%, transparent 15%, rgba(255, 255, 255, 0) 50%, transparent 85%, rgba(0, 0, 0, 0.3)), -ms-linear-gradient(top, #333 0%, #666 10%, #999 30%, rgba(255, 255, 255, 0.8) 60%, #999 70%, #666 90%, #333 100%);
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.3) 0%, transparent 15%, rgba(255, 255, 255, 0) 50%, transparent 85%, rgba(0, 0, 0, 0.3)), -o-linear-gradient(top, #333 0%, #666 10%, #999 30%, rgba(255, 255, 255, 0.8) 60%, #999 70%, #666 90%, #333 100%);
+}
+#arm:before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  left: 15px;
+  width: 16px;
+  height: 70px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 0px #333;
+  background-color: #999;
+  -webkit-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  transform: rotate(3deg);
+  background-image: -webkit-linear-gradient(left, #666 0%, rgba(255, 255, 255, 0.7) 50%, #666 100%);
+  background-image: -moz-linear-gradient(left, #666 0%, rgba(255, 255, 255, 0.7) 50%, #666 100%);
+  background-image: -ms-linear-gradient(left, #666 0%, rgba(255, 255, 255, 0.7) 50%, #666 100%);
+  background-image: -o-linear-gradient(left, #666 0%, rgba(255, 255, 255, 0.7) 50%, #666 100%);
+  background-image: linear-gradient(to right, #666 0%, rgba(255, 255, 255, 0.7) 50%, #666 100%);
+  -webkit-transition: all 0.5s ease-in-out 0s;
+  -moz-transition: all 0.5s ease-in-out 0s;
+  -o-transition: all 0.5s ease-in-out 0s;
+  -ms-transition: all 0.5s ease-in-out 0s;
+  transition: all 0.5s ease-in-out 0s;
+}
+#arm:after {
+  content: '';
+  position: absolute;
+  top: -71px;
+  left: 6px;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background-color: #760209;
+  border: 2px solid #5d0207;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background-image: -webkit-radial-gradient(50% 40%, closest-corner, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+  background-image: -moz-radial-gradient(50% 40%, closest-corner, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+  background-image: -ms-radial-gradient(50% 40%, closest-corner, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+  background-image: -o-radial-gradient(50% 40%, closest-corner, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+  -webkit-transition: all 0.5s ease-in-out 0s;
+  -moz-transition: all 0.5s ease-in-out 0s;
+  -o-transition: all 0.5s ease-in-out 0s;
+  -ms-transition: all 0.5s ease-in-out 0s;
+  transition: all 0.5s ease-in-out 0s;
+}
+
+#arm.clicked:before {
+  top: -15px;
+  left: 14px;
+  -webkit-transform: rotate3d(100, 10, 0, 180deg);
+  -moz-transform: rotate3d(100, 10, 0, 180deg);
+  transform: rotate3d(100, 10, 0, 180deg);
+  -webkit-transform-origin: 0% 100%;
+  -moz-transform-origin: 0% 100%;
+  transform-origin: 0% 100%;
+  -webkit-transition: all 0.5s ease-in-out 0s;
+  -moz-transition: all 0.5s ease-in-out 0s;
+  -o-transition: all 0.5s ease-in-out 0s;
+  -ms-transition: all 0.5s ease-in-out 0s;
+  transition: all 0.5s ease-in-out 0s;
+}
+#arm.clicked:after {
+  top: 90px;
+  left: -8px;
+  -webkit-transition: all 0.5s ease-in-out 0s;
+  -moz-transition: all 0.5s ease-in-out 0s;
+  -o-transition: all 0.5s ease-in-out 0s;
+  -ms-transition: all 0.5s ease-in-out 0s;
+  transition: all 0.5s ease-in-out 0s;
+}
+
+
+

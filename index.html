@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Tragaperras</title>
+    <link rel="stylesheet" href="./bower_components/jQuery-SlotMachine/dist/jquery.slotmachine.min.css" type="text/css"/>
+    <link rel="stylesheet" href="main.css" type="text/css"/>
+  </head>
+  <body>
+    <div id="app">
+      <section class="slotmachine-container">
+        <!--<div class="slotmachine-scoretable"></div>-->
+        <div class="slotmachine-body" id="slotMachine">
+          <div class="slotmachine-result">
+            <span class="slotmachine-result-text" v-bind:class="{ 'lose': !win }">Ganador</span>
+          </div>
+          <div class="slotmachine-display">
+            <span class="shadow-top"></span>
+            <span class="shadow-bottom"></span>
+            <div class="slotmachine-display-slot" id="slot1">
+              <ul class="slot">  
+                <li v-for="opt in options" >
+                  <img :src.sync="opt.pic" width="auto" height="70">
+                </li>  
+              </ul>  
+            </div>
+            <span class="shadow-top"></span>
+            <span class="shadow-bottom"></span>
+            <div class="slotmachine-display-slot" id="slot2">
+              <ul class="slot">  
+                <li v-for="opt in options" >
+                  <img :src.sync="opt.pic" width="auto" height="70">
+                </li>  
+              </ul>  
+            </div>
+            <span class="shadow-top"></span>
+            <span class="shadow-bottom"></span>
+            <div class="slotmachine-display-slot" id="slot3">
+              <ul class="slot">  
+                <li v-for="opt in options" >
+                  <img :src.sync="opt.pic" width="auto" height="70">
+                </li>  
+              </ul>  
+            </div>
+            <div class="slotmachine-stats">
+              <div class="slotmachine-stats-slot">
+                <h3>Creditos</h3>
+                <p>{{ credits }}</p>
+              </div>
+              <div class="slotmachine-stats-slot">
+                <h3>Apuesta</h3>
+                <p>{{ bet }}</p>
+              </div>
+              <div class="slotmachine-stats-button no-select" v-bind:class="{'disabled' : bet >=5 }" @click="betOne">+1</div>
+            </div>
+          </div>
+          <div class="slotmachine-handle">
+            <div class="button" id="playBtn" @click="shuffle">
+              <div id="equation" class="done">
+                <div id="shoulder">
+                  <div id="arm" v-bind:class="{'clicked': handle}"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!--<div class="slotmachine-handle" @click="shuffle">-->
+          <!--<div class="slotmachine-handle-head">-->
+          <!--<div class="slotmachine-handle-ball"></div>-->
+          <!--<div class="slotmachine-handle-joint"></div>-->
+          <!--</div>-->
+          <!--<div class="slotmachine-handle-body"></div>-->
+          <!--<div class="slotmachine-handle-base"></div>-->
+          <!--</div>-->
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- this button will start the spin -->  
+    <!--<input type="button" id="playBtn" value="play">  -->
+
+    <script src="./bower_components/vue/dist/vue.min.js"></script>
+    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./lib/jquery.jSlots.min.js" charset="utf-8"></script>  
+    <script src="./lib/jquery.easing.1.3.js" charset="utf-8"></script>  
+    <script src="app.js"></script>
+
+    <script type="text/javascript" charset="utf-8">  
+      $('.slot').jSlots({  
+        spinner : '#playBtn',  
+        winnerNumber : 3  
+      });  
+
+    </script> 
+  </body>
+</html>
