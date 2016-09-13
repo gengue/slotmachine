@@ -19,29 +19,23 @@
             <span class="shadow-top"></span>
             <span class="shadow-bottom"></span>
             <div class="slotmachine-display-slot" id="slot1">
-              <ul class="slot">  
-                <li v-for="opt in options" >
+                <div v-for="opt in options">
                   <img :src.sync="opt.pic" width="auto" height="70">
-                </li>  
-              </ul>  
+                </div>  
             </div>
             <span class="shadow-top"></span>
             <span class="shadow-bottom"></span>
             <div class="slotmachine-display-slot" id="slot2">
-              <ul class="slot">  
-                <li v-for="opt in options" >
+                <div v-for="opt in options">
                   <img :src.sync="opt.pic" width="auto" height="70">
-                </li>  
-              </ul>  
+                </div>  
             </div>
             <span class="shadow-top"></span>
             <span class="shadow-bottom"></span>
             <div class="slotmachine-display-slot" id="slot3">
-              <ul class="slot">  
-                <li v-for="opt in options" >
+                <div v-for="opt in options">
                   <img :src.sync="opt.pic" width="auto" height="70">
-                </li>  
-              </ul>  
+                </div>  
             </div>
             <div class="slotmachine-stats">
               <div class="slotmachine-stats-slot">
@@ -64,36 +58,16 @@
               </div>
             </div>
           </div>
-          
-          <!--<div class="slotmachine-handle" @click="shuffle">-->
-          <!--<div class="slotmachine-handle-head">-->
-          <!--<div class="slotmachine-handle-ball"></div>-->
-          <!--<div class="slotmachine-handle-joint"></div>-->
-          <!--</div>-->
-          <!--<div class="slotmachine-handle-body"></div>-->
-          <!--<div class="slotmachine-handle-base"></div>-->
-          <!--</div>-->
-
         </div>
       </section>
-
     </div>
-
-    <!-- this button will start the spin -->  
-    <!--<input type="button" id="playBtn" value="play">  -->
 
     <script src="./bower_components/vue/dist/vue.min.js"></script>
     <script src="./bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="./lib/jquery.jSlots.min.js" charset="utf-8"></script>  
-    <script src="./lib/jquery.easing.1.3.js" charset="utf-8"></script>  
+    <script src="./bower_components/jQuery-SlotMachine/dist/jquery.slotmachine.js" charset="utf-8"></script>  
     <script src="app.js"></script>
 
     <script type="text/javascript" charset="utf-8">  
-      $('.slot').jSlots({  
-        spinner : '#playBtn',  
-        winnerNumber : 3  
-      });  
-
     </script> 
   </body>
 </html>

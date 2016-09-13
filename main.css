@@ -63,7 +63,16 @@ body {
     display: inline-block;
     margin: 0 10px;
     border-radius: 5px;
+    overflow: hidden;
 }
+
+.slotmachine-display-slot > div {
+    position: initial;
+    padding: 15px;
+    margin: 0;
+    margin-top: 17px;
+}
+
 
 .slotmachine-display-roll {
     display: flex;
@@ -243,66 +252,8 @@ body {
                                   not supported by any browser */
 }
 
-/* ======================================================================== */
-/* SLOTS */
-
-.jSlots-wrapper {  
-    overflow: hidden; /* to hide the magic */  
-    height: 138px; /* whatever the height of your list items are */  
-    display: inline-block; /* to size width correctly, can use float too, or width*/  
-    width: 100%;
-}  
-
-.jSlots-wrapper ul{
-    position: initial;
-    list-style: none;
-    padding: 15px;
-}
-
-/* ======================================================================== */
 /* HANDLE */
 
-/* Mixins */
-@-moz-keyframes spin /* Firefox */ {
-  from {
-    background-position: 0, 0 0;
-  }
-  to {
-    background-position: 0, 0 -1580px;
-  }
-}
-@-webkit-keyframes spin /* Safari and Chrome */ {
-  from {
-    background-position: 0, 0 0;
-  }
-  to {
-    background-position: 0, 0 -1580px;
-  }
-}
-@-ms-keyframes spin /* IE */ {
-  from {
-    background-position: 0, 0 0;
-  }
-  to {
-    background-position: 0, 0 -1580px;
-  }
-}
-@-o-keyframes spin /* Opera */ {
-  from {
-    background-position: 0, 0 0;
-  }
-  to {
-    background-position: 0, 0 -1580px;
-  }
-}
-@keyframes spin {
-  from {
-    background-position: 0, 0 0;
-  }
-  to {
-    background-position: 0, 0 -1580px;
-  }
-}
 #equation {
   position: absolute;
   left: 50%;
@@ -497,6 +448,4 @@ body {
   -ms-transition: all 0.5s ease-in-out 0s;
   transition: all 0.5s ease-in-out 0s;
 }
-
-
 
